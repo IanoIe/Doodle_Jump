@@ -48,7 +48,7 @@ window.onload = function() {
 
     // carregar imagens
     doodlerRightImg = new Image();
-    doodlerRightImg.src = "../images/doodler-right.png.png";
+    doodlerRightImg.src = "../images/doodler-right.png";
     doodler.img = doodlerRightImg;
     doodlerRightImg.onload = function() {
         context.drawImage(doodler.img, doodler.x, doodler.y, doodler.width, doodler.height);
@@ -58,7 +58,7 @@ window.onload = function() {
     doodlerLeftImg.src = "../images/doodler-left.png";
 
     platformImg = new Image();
-    doodlerLeftImg.src = "../images/platform.png";
+    platformImg.src = "../images/platform.png";
 
 
     velocityY = initialVelocityY;
@@ -183,23 +183,24 @@ function placePlatforms() {
 }
 
 function newPlatform() {
-    let randomX = Math.floor(Math.random() * boardWidth*3/4);
+    let randomX = Math.floor(Math.random() * boardWidth*3/4); 
     let platform = {
         img : platformImg,
         x : randomX,
         y : -platformHeight,
-        with : platformWidth,
+        width : platformWidth,
         height : platformHeight
     }
 
     platformArray.push(platform);
 }
 
+
 function detectCollision(a, b) {
     return a.x < b.x + b.width && //o canto superior esquerdo de a não alcança o canto superior direito de b
            a.x + a.width > b.x && //o canto superior direito de a passa pelo canto superior esquerdo de b
            a.y < b.y + b.height && //o canto superior esquerdo de a não alcança o canto inferior esquerdo de b
-           a.y + b.height > b.y   //O canto inferior esquerdo de a passa pelo canto superior esquerdo de b          
+           a.y + a.height > b.y   //O canto inferior esquerdo de a passa pelo canto superior esquerdo de b          
 }
 
 function updateScore() {
